@@ -4,8 +4,9 @@ def logic():
 
     # We need to ensure that the user inputs EXACTLY 4 numbers
 
-    code = secret_code()
-    users_guess = [1,2,0,4]
+    # code = secret_code() 
+    code = [0, 1, 3, 5]
+    users_guess = [0, 2, 4, 6]
     correct_position = 0
     correct_number = 0
 
@@ -16,11 +17,14 @@ def logic():
         if code_num == user_num:
             correct_position+=1
 
-    for num in users_guess:
-        if num in code:
-            correct_number += 1
+    copy_code = code[:]
 
-    correct_number = correct_number - correct_position
+    for num in users_guess:
+        if num in copy_code:
+            correct_number += 1
+            copy_code.remove(num)
+
+    
 
     return f'secret_code: {code}, user_guess: {users_guess}, correct_number: {correct_number}, correct_pos: {correct_position}'
 
