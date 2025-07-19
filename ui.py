@@ -10,7 +10,7 @@ def clear_screen():
     else:
         os.system("clear")
 
-
+# User Interface
 def ui():
     # Welcome 
     width=50
@@ -25,27 +25,28 @@ def ui():
     print('- Numbers may be repeated (Duplicates are allowed)')
     print('- You have 10 attempts to find the correct combination')
     print('- Goodluck!\n\n')
-    start_game()
-    clear_screen()
-
-
-
-# Press Enter to start the game
-def start_game():
-    start = input('PRESS[ENTER] OR [SPACE] TO START THE GAME')
-
-    while True:
-        if start == '' or start == ' ':
-            break
-
-
     
+    # Wait for user to start
+    press_to_start()
+    
+    # Clear screen and start the actual game
+    clear_screen()
+    print("The Secret Code has been Generated...")
+    
+    
+# Ask the user to start the game 
+def press_to_start():
+    start = input('PRESS [ENTER] TO START THE GAME: ')
+    
+    # Check if they pressed [Enter]
+    if start == "":
+        return  
+    else:
+        # Ask again if they didn't press [Enter]
+        return press_to_start()  
 
 
-
+# clear the screen when the game is ran
 if __name__ == "__main__":
     clear_screen()
-    ui()  
-
-
-
+    ui()
