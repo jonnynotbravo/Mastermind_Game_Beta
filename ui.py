@@ -31,7 +31,8 @@ def ui():
     
     # Clear screen and start the actual game
     clear_screen()
-    print("The Secret Code has been Generated...")
+    print("The Secret Code has been Generated...\n")
+    print("Instructions: Enter 4 digits between 0-7 with no spaces")
     
     
 # Ask the user to start the game 
@@ -50,3 +51,8 @@ def press_to_start():
 if __name__ == "__main__":
     clear_screen()
     ui()
+
+
+
+
+
