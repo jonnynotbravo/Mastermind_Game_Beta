@@ -1,8 +1,6 @@
+from secret_code import secret_code
 import os
 import platform
-
-from secret_code import secret_code
-
 
 # Clearing CLI for the user
 def clear_screen():
@@ -13,17 +11,19 @@ def clear_screen():
     else:
         os.system("clear")
 
-
-
+# Main Logic
 def logic():
     # Secret code
     code = secret_code()
-    
-    history = {}
-    # User has 10 attempts to win
+
+    # Data set to put history of guesses and their feedback
+    attempts_history = {}
+
+    # Number of attempts to win
     attempts = 10
     
     while attempts > 0:
+        # Display number of attempts left
         print(f"Attempt: {attempts}")
         
         # Ensure that the user inputs EXACTLY 4 numbers between 0 - 7 with no spaces
@@ -37,14 +37,16 @@ def logic():
                 print("Invalid! Enter exactly 4 digits (0-7) with no spaces.")
                 continue
             
+            # Convert user input to a list of integers
             user_guess = [int(x) for x in user_input]
-            clear_screen()
             break
         
         # Logic
-        correct_location = 0
+
+        # Data to hold the correct numbers and correct positions
         correct_number = 0
-        
+        correct_location = 0
+
         # Check for correct positions
         for i in range(4):
             code_num = code[i]
@@ -53,37 +55,43 @@ def logic():
             if code_num == user_num:
                 correct_location += 1
         
-        # Check for correct numbers (including correct positions)
+        # Check for correct numbers
         copy_code = code[:]
         for num in user_guess:
             if num in copy_code:
                 correct_number += 1
                 copy_code.remove(num)
         
+        # Clear screen only if not a winning guess
+        if correct_location != 4:
+            clear_screen()
+
+        # Check if won
+        if correct_location == 4:
+            return f"\nYou Win!!! The Secret Code was {''.join(map(str, code))}\n"
+        
         # Store feedback in history
         prev_guess = ''.join(map(str, user_guess))
-        feedback = f"{correct_number} correct number(s), {correct_location} correct location(s)"
-        history[prev_guess] = feedback
+        feedback = f"{correct_number} correct number(s), {correct_location}"
+        attempts_history[prev_guess] = feedback
         
-        # Show guess history
-        if history:
+        # Show attempts history and their feedback
+        if attempts_history:
             print("\n" + "="*55)
             print("History of Guesses and their feedback".center(50))
             print("="*55)
   
-            for prev_guess, feedback in history.items():
-                print(f"Guess: {prev_guess} -> Feedback: {feedback}")
+            for prev_guess, feedback in attempts_history.items():
+                print(f"Your Guess: {prev_guess} -> Feedback: {feedback}")
             print("="*70 + "\n")
-        
-        # print(f"\nCurrent Guess Result: {correct_number} correct number and {correct_location} correct location")
-        
-        # Check if won
-        if correct_location == 4:
-            return 'You Win!!!'
-        
-        # Decrease attempts AFTER processing the guess
+
+        # Decrease attempts if the guess is incorrect(Keep looping)
         attempts -= 1
     
-    return 'Game Over'
+    return f'Game Over!\nYou have failed to guess the combination in 10 attemps!\nThe Secret Code was {''.join(map(str, code))}\n'
 
-print(logic())
+
+
+if __name__ == '__main__':
+    clear_screen()
+    print(logic())
