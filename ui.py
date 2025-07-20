@@ -1,14 +1,4 @@
-import os
-import platform
-
-# Clearing CLI for the user
-def clear_screen():
-    # For Windows
-    if platform.system() == "Windows":
-        os.system("cls")
-    # For other OS
-    else:
-        os.system("clear")
+from logic import logic, clear_screen
 
 # User Interface
 def ui():
@@ -31,8 +21,8 @@ def ui():
     
     # Clear screen and start the actual game
     clear_screen()
-    print("The Secret Code has been Generated...\n")
-    print("Instructions: Enter 4 digits between 0-7 with no spaces")
+    logic()
+    
     
     
 # Ask the user to start the game 

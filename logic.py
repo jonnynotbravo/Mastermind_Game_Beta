@@ -23,6 +23,23 @@ def logic():
     attempts = 10
     
     while attempts > 0:
+        # Clear screen only if not a winning guess
+        clear_screen()
+
+        # Instruction for the user
+        print("The Secret Code has been Generated...")
+        print("Instructions: Enter 4 digits between 0-7 with no spaces\n")
+
+        # Show attempts history and their feedback
+        if attempts_history:
+            print("" + "="*55)
+            print("History of Guesses and their feedback".center(50))
+            print("="*75)
+
+            for prev_guess, feedback in attempts_history.items():
+                print(f"Your Guess: {prev_guess} -> Feedback: {feedback}")
+            print("="*75 + "\n")
+
         # Display number of attempts left
         print(f"Attempt: {attempts}")
         
@@ -61,10 +78,6 @@ def logic():
             if num in copy_code:
                 correct_number += 1
                 copy_code.remove(num)
-        
-        # Clear screen only if not a winning guess
-        if correct_location != 4:
-            clear_screen()
 
         # Check if won
         if correct_location == 4:
@@ -72,26 +85,15 @@ def logic():
         
         # Store feedback in history
         prev_guess = ''.join(map(str, user_guess))
-        feedback = f"{correct_number} correct number(s), {correct_location}"
+        feedback = f"{correct_number} correct number(s), {correct_location} correct location(s) {code}"
         attempts_history[prev_guess] = feedback
-        
-        # Show attempts history and their feedback
-        if attempts_history:
-            print("\n" + "="*55)
-            print("History of Guesses and their feedback".center(50))
-            print("="*55)
-  
-            for prev_guess, feedback in attempts_history.items():
-                print(f"Your Guess: {prev_guess} -> Feedback: {feedback}")
-            print("="*70 + "\n")
 
         # Decrease attempts if the guess is incorrect(Keep looping)
         attempts -= 1
     
-    return f'Game Over!\nYou have failed to guess the combination in 10 attemps!\nThe Secret Code was {''.join(map(str, code))}\n'
+    return f'\nGame Over!\nYou have failed to guess the combination in 10 attempts!\nThe Secret Code was {''.join(map(str, code))}\n'
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     clear_screen()
     print(logic())
