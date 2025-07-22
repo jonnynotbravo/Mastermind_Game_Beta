@@ -21,7 +21,10 @@ def ui():
     
     # Clear screen and start the actual game
     clear_screen()
-    logic()
+    
+    # Print The result of the game
+    result = logic()
+    print(result)
     
     
     
