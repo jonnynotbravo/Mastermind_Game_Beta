@@ -93,8 +93,7 @@ def logic():
     
     return f'\nGame Over!\nYou have failed to guess the combination in 10 attempts!\nThe Secret Code was {''.join(map(str, code))}\n'
 
-
+# Used for testing the logic.py independently to clear the screen as soon as the app runs
 if __name__ == "__main__":
-    # Clear Screen as soon the app runs
     clear_screen()
     print(logic())
