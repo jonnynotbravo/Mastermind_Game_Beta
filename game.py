@@ -1,7 +1,7 @@
 from logic import logic, clear_screen
 
 # User Interface
-def ui():
+def game():
     # Welcome 
     width=50
     print("=".center(width,"="))
@@ -43,7 +43,7 @@ def press_to_start():
 # clear the screen when the game is ran
 if __name__ == "__main__":
     clear_screen()
-    ui()
+    game()
 
 
 
