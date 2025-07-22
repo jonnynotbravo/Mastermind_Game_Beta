@@ -85,7 +85,7 @@ def logic():
         
         # Store feedback in history
         prev_guess = ''.join(map(str, user_guess))
-        feedback = f"{correct_number} correct number(s), {correct_location} correct location(s) {code}"
+        feedback = f"{correct_number} correct number(s), {correct_location} correct location(s)"
         attempts_history[prev_guess] = feedback
 
         # Decrease attempts if the guess is incorrect(Keep looping)
@@ -95,5 +95,6 @@ def logic():
 
 
 if __name__ == "__main__":
+    # Clear Screen as soon the app runs
     clear_screen()
     print(logic())
